@@ -1,0 +1,310 @@
+[bar/top]
+background = #1F1412
+height = 20
+right = true
+top = true
+width = 100%
+radius = 0
+modules-left = xwindow
+
+
+[bar/bottom]
+background = #4c3e37
+width = 100%
+height = 20
+radius = 0
+fixed-center = false
+bottom = true
+enable-ipc = true
+cursor-click = pointer
+
+font-0 = NotoSans:pixelsize=10
+font-1 = NotoSansSymbols2:pixelsize=12;3
+font-2 = Material Icons:pixelsize=12;2
+font-3 = FontAwesome:pixelsize=12;2
+
+line-size = 3
+line-color = #f00
+
+tray-position = right
+tray-padding = 5
+tray-background = #000000
+
+; module-margin-left = 1
+; module-margin-right = 2
+
+padding-left = 0
+; padding-right = 2
+padding-bottom = 1
+padding-top = 2
+
+modules-left = i3 xwindow
+modules-right = backlight network pulseaudio battery date
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+poll-interval = 5
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+<animation-charging>
+format-charging = <animation-charging> <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+<animation-discharging>
+format-discharging = <animation-discharging> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+<ramp-capacity>
+format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+label-full = 100%
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+; Only applies if <animation-discharging> is used
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
+
+format-discharging-background = #2c2420
+format-discharging-padding = 2
+format-charging-background = #2c2420
+format-charging-padding = 2
+format-full-background = #2c2420
+format-full-padding = 2
+
+
+[module/i3]
+type = internal/i3
+; format = <label-state> <label-mode>
+format = <label-state>  
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-font = 3
+; label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #fff
+label-mode-background = #a00
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+label-focused-background = #000
+label-focused-underline= #777
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+; label-unfocused = %icon%
+; label-unfocused = %icon%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+; label-visible = %index%
+label-visible-background = #777
+label-visible-underline = #777
+label-visible-padding = #777
+
+; urgent = Workspace with urgency hint set
+; label-urgent = %index%
+label-urgent-background = #f00
+; label-urgent-foreground = #fff
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = 
+
+ws-icon-0 = ;
+ws-icon-1 = ;
+ws-icon-2 = ;
+ws-icon-3 = ;
+ws-icon-4 = ;
+ws-icon-5 = ;
+ws-icon-6 = ;
+ws-icon-7 = ;
+ws-icon-8 = ;
+ws-icon-9 = ;
+; ws-icon-default =
+
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:50:...%
+label-margin-left = 2
+
+[module/date]
+type = internal/date
+interval = 1.0
+date = %d / %m / %Y%
+time = %H: %M: %S
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S
+label = %time% %date%
+format = <label>
+format-background = #141211
+format-padding = 2
+;format-foreground = #fff
+
+[module/network]
+; background = #0c0f09
+type = internal/network
+interface = wlp6s0
+interval = 3.0
+; count=0
+; udspeed-minwidth = 1
+accumulate-stats = true
+unknown-as-up = true
+format-connected = <ramp-signal> <label-connected>
+format-disconnected = <label-disconnected>
+; format-packetloss = <animation-packetloss> <label-connected>
+label-connected = %{T3}%{T-}%downspeed:6% %{T3}%{T-}%upspeed:6%
+; add to label-connected %essid%
+label-connected-foreground = #AACCFF
+label-disconnected = not connected
+label-disconnected-foreground = #DD8888
+ramp-signal-0 = %{T3}%{T-}
+ramp-signal-1 = %{T3}%{T-}
+ramp-signal-2 = %{T3}%{T-}
+ramp-signal-3 = %{T3}%{T-}
+ramp-signal-4 = %{T3}%{T-}
+ramp-signal-5 = %{T3}%{T-}
+ramp-signal-foreground = #AACCFF
+;format-connected-background = #0c0f09
+;format-disconnected-background = #0c0f09
+format-connected-padding = 2
+format-disconnected-padding = 2
+; animation-packetloss-0 = ⚠
+; animation-packetloss-0-foreground = #ffa64c
+; animation-packetloss-1 = 📶
+; animation-packetloss-1-foreground = #000000
+; animation-packetloss-framerate = 500
+; left-click = exec nm-applet
+
+; The config parameter `module/network.udspeed-minwidth` is deprecated, use `module/network.%downspeed:min:max% and %upspeed:min:max%` instead.
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+Default: true
+; use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Available tags:
+; <label-volume>
+; <ramp-volume>
+; <bar-volume>
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+; Right and Middle click (unreleased)
+; click-right = 
+; click-middle = exec --no-startup-id pavucontrol
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-background = #402D2F
+format-volume-padding = 2
+format-muted-background = #402D2F
+format-muted-padding = 2
+
+[module/backlight]
+type = internal/xbacklight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+; Available tags:
+; <label>
+; <ramp>
+;   <bar>
+format = <ramp> <label>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+
+
+[settings]
+screenchange-reload = false
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over

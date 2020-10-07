@@ -1,0 +1,23 @@
+[icons]
+# font awesome
+TelegramDesktop = ""
+Thunderbird = ""
+# smile emoji
+MyNiceProgram = "😛"
+
+[aliases]
+TelegramDesktop = "Telegram"
+"Org.gnome.Nautilus" = "Nautilus"
+firefox = ""
+kitty = ""
+code-oss = ""
+discord = ""
+Thunar = ""
+jetbrains-studio = ""
+# "" - Alternative
+# "" - Broken
+
+[general]
+separator = " "
+# default_icon = ""
+# default_alias = ""
